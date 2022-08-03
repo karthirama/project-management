@@ -1,0 +1,44 @@
+package com.rama.projectmanagement.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.rama.projectmanagement.model.Project;
+import com.rama.projectmanagement.service.ProjectService;
+
+@Controller
+@RequestMapping("/")
+public class ProjectController {
+
+	@Autowired
+	private ProjectService projectService;
+
+	@PostMapping("/createproject")
+	public String saveProject(Project project) {
+		projectService.saveProject(project);
+		return "new-project";
+	}
+
+	@GetMapping("/newproject")
+	public String displayNewProject(Model model) {
+		model.addAttribute("project", new Project());
+		return "new-project";
+	}
+
+	@GetMapping("/showprojects")
+	public List<Project> showAllProject() {
+		return projectService.getAllProjects();
+	}
+
+	@GetMapping("/showprojectsbystatus")
+	public List<Project> showProjectsByStatus(String status) {
+		return projectService.getProjectsByStatus(status);
+	}
+
+}
