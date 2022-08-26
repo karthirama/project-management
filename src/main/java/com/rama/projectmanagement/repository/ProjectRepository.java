@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.rama.projectmanagement.model.Project;
 
-public interface ProjectRepository extends JpaRepository<Project, Integer>{
+public interface ProjectRepository extends JpaRepository<Project, Long>{
 	
 	
-	List<Project> findByStatus(String status);
+	List<Project> findByStage(String stage);
 
 }

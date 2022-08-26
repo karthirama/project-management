@@ -13,7 +13,7 @@ import com.rama.projectmanagement.model.Project;
 import com.rama.projectmanagement.service.ProjectService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/projects")
 public class ProjectController {
 
 	@Autowired
@@ -22,18 +22,20 @@ public class ProjectController {
 	@PostMapping("/createproject")
 	public String saveProject(Project project) {
 		projectService.saveProject(project);
-		return "new-project";
+		return "redirect:/projects/new";
 	}
 
-	@GetMapping("/newproject")
+	@GetMapping("/new")
 	public String displayNewProject(Model model) {
 		model.addAttribute("project", new Project());
-		return "new-project";
+		return "project/new-project";
 	}
 
-	@GetMapping("/showprojects")
-	public List<Project> showAllProject() {
-		return projectService.getAllProjects();
+	@GetMapping()
+	public String showAllProject(Model model) {
+		List<Project> projects = projectService.getAllProjects();
+		model.addAttribute("projects", projects);
+		return "project/list-projects";
 	}
 
 	@GetMapping("/showprojectsbystatus")

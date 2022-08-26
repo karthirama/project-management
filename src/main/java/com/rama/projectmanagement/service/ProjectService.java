@@ -24,7 +24,7 @@ public class ProjectService {
 		return projectRepository.findAll();
 	}
 	
-	public List<Project> getProjectsByStatus(String status){
-		return projectRepository.findByStatus(status);
+	public List<Project> getProjectsByStatus(String stage){
+		return projectRepository.findByStage(stage);
 	}
 }
